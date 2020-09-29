@@ -137,7 +137,111 @@ $$
 
 ## 3 Properties of Gaussians
 
+### 3.1
 
+$$
+\begin{equation}
+\begin{split}
+E[e^{-\lambda X}]&=\int_{-\infty}^{+\infty}e^{-\lambda X}\frac{1}{\sqrt{2\pi \sigma^2}}e^{-\frac{x^2}{2\sigma^2}}dx\\
+&=\frac{1}{\sqrt{2\pi \sigma^2}}\int_{-\infty}^{+\infty}e^{-(\frac{x}{\sqrt{2}\sigma}-\frac{\sigma\lambda}{\sqrt{2}})^2+\frac{\sigma^2\lambda^2}{2}}dx\\
+&=\frac{e^{\frac{\sigma^2\lambda^2}{2}}}{\sqrt{\pi}}\int_{-\infty}^{+\infty}e^{-t^2}dt\\
+&=e^{\frac{\sigma^2\lambda^2}{2}}
+\end{split}
+\end{equation}
+$$
+
+### 3.2
+
+$$
+P(X\geq t)=P(e^{\lambda X}\geq e^{\lambda t})\leq\frac{E[e^{\lambda X}]}{e^{\lambda t}},\lambda=\frac{t}{\sigma^2}
+$$
+
+### 3.3
+
+$$
+\sum_{i=1}^{n}X_{i}\sim N(0,n\sigma^2)
+$$
+
+$$
+\frac{1}{n}\sum_{i=1}^{n}X_{i}\sim N(0,\frac{\sigma^2}{n})
+$$
+
+### 3.4
+
+$$
+X\sim N(0,1),
+Y\sim
+\begin{equation}
+\left\{
+             \begin{array}{lr}
+            X, & p=0.5 \\
+            -X, & 1-p=0.5
+             \end{array}
+\right.
+\end{equation}
+$$
+
+### 3.5
+
+$$
+u_{x}\sim N(0,\sum u_{i}^{2})
+$$
+
+$$
+v_{x}\sim N(0,\sum v_{i}^{2})
+$$
+
+$$
+\sum u_iv_i=0
+$$
+
+$$
+Cov(u_x,v_x)=\frac{1}{2}[D(X+Y)-DX-DY]=\sum(u_i+v_i)^2-\sum u_i^2-\sum v_i^2=0
+$$
+
+
+
+### 3.6
+
+???
+
+## 4 Linear Algebra Review
+
+### 4.1
+
+(1)
+$$
+x_TAx\geq 0
+$$
+(2)
+$$
+Ax_i=\lambda_ix_i
+$$
+
+$$
+x_i^TAx_i=\lambda_i||x_i||^2\geq 0
+$$
+
+$$
+\lambda_i\geq 0
+$$
+
+(3)
+$$
+A=Q\varLambda Q^T,\varLambda=diag(\lambda_1, \lambda_2,\cdots,\lambda_m,0,\cdots,0)
+$$
+
+$$
+B=diag(\sqrt{\lambda_1},\sqrt{\lambda_2},\cdots,\sqrt{\lambda_m},0,\cdots,0)
+$$
+
+$$
+U=QB^T,U^T=BQ^T
+$$
+
+$$
+A=UU^T
+$$
 
 
 
