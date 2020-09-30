@@ -209,11 +209,11 @@ $$
 
 ### 4.1
 
-(1)
+(a)
 $$
 x_TAx\geq 0
 $$
-(2)
+(b)
 $$
 Ax_i=\lambda_ix_i
 $$
@@ -226,7 +226,7 @@ $$
 \lambda_i\geq 0
 $$
 
-(3)
+(c)
 $$
 A=Q\varLambda Q^T,\varLambda=diag(\lambda_1, \lambda_2,\cdots,\lambda_m,0,\cdots,0)
 $$
@@ -243,119 +243,136 @@ $$
 A=UU^T
 $$
 
+### 4.2
 
-
-
-
-
-
-## 7 Theory of Hard-Margin Support Vector Machines
-
-### Dual Optimization Problem
-
-Consider the optimization problem below:
+(a)
 $$
-\min f(x)
+x^T(2A+3B)x=2x^TAx+3x^TBx\geq 0
 $$
-
+(b)
 $$
-s.t.\quad g_{k}(x)\leq 0
+e_k=(0,0,\cdots,1,0,\cdots,0)^T,A_{kk}=e_k^TAe_k\geq 0
+$$
+(c)
+$$
+e=(1,1,\cdots,1)^T,\sum_i\sum_j A_{ij}=e^TAe\geq 0
 $$
 
-Lagrange multiplier:
-$$
-\mathcal{L}(x,u)=f(x)+\sum_{k=1}^{n}\lambda_{k}g_{k}(x),\quad \lambda_{k}\geq0,g_{k}(x)\leq 0
-$$
-Obviously:
-$$
-\max_{\lambda}\mathcal{L}(x,\lambda)=f(x)
-$$
+(d) ???
+
+(e) ???
+
+### 4.3
+
+eigendecomposition
+
+### 4.4
+
+Step 1: All Real Symmetric Matrices can be diagonalized in the form: $H=QΛQ^T$ So, $v^THv=v^TQΛQ^Tv$.
+
+Step 2: Define transformed vector: $y=Q^Tv$. So, $v^THv=y^TΛy$.
+
+Step 3: Expand $y^TΛy=λ_{max}y^2_1+λ_2y^2_2+⋯+λ_{min}y^2_N\leq \lambda_{max}y^Ty=\lambda_{max}v^Tv$.
+
+Step 6: Putting it all back together. $v^THv\leq \lambda_{max}v^Tv=\lambda_{max}$.
+
+## 5 Gradients and Norms
+
+### 5.1
 
 $$
-\min_{x}f(x)=\min_{x}\max_{\lambda}\mathcal{L}(x,\lambda)
+||x||_{\infty}\leq ||x||_{2}\leq ||x||_{1}\leq \sqrt{n}||x||_{2}\leq n||x||_{\infty}
 $$
 
-Then:
+Cauchy-Schwarz inequality:
+$$
+y=(1,1,\cdots,1)^T,|<x,y>|=||x||_1\leq||x||_2||y||_2=\sqrt{n}||x||_2
+$$
+
+### 5.2
+
+(a) 
+$$
+\frac{y_i}{\beta_i}
+$$
+(b)
+$$
+0
+$$
+(c)
+$$
+A_{ij}
+$$
+(d)
+$$
+\sum_{i=1}^n \frac{y_iA{ij}}{\tanh(Ax+b)_1}
+$$
+
+### 5.3 
+
+pass
+
+### 5.4
+
+pass
+
+### 5.5
+
 $$
 \begin{equation}
 \begin{split}
-\max_{\lambda}\min_{x}\mathcal{L}(x,\lambda)&=\max_{\lambda}\min_{x}f(x)+\max_{\lambda}\min_{x}\lambda g(x) \\
-&=\min_{x}f(x)+\max_{\lambda}\min_{x}\lambda g(x)\\
+L(\theta)&=||y-X\theta||_2^2\\
+&=(y-X\theta)^T(y-X\theta)\\
+&=y^Ty+\theta^TX^TX\theta-2y^TX\theta\\
 \end{split}
 \end{equation}
-$$
-We can prove that:
-$$
-\begin{equation}
-\min_{x}\lambda g(x)=
-\left\{
-             \begin{array}{lr}
-            0, & \lambda=0 \quad or\quad g(x)=0 \\
-            -\infty, & \lambda>0 \quad and\quad g(x)<0
-             \end{array}
-\right.
-\end{equation}
-$$
-Therefore, when $\lambda=0 $ or $ g(x)=0$:
-$$
-\min_{x}f(x)=\min_{x}\max_{\lambda}\mathcal{L}(x,\lambda)=\max_{\lambda}\min_{x}\mathcal{L}(x,\lambda)
-$$
-
-### Karush-Kuhn-Tucker (KKT) conditions
-
-Consider the standard constraint optimization problem:
-$$
-\min f(\mathbf{x})
 $$
 
 $$
 \begin{equation}
 \begin{split}
-s.t.\quad&g_{j}(\mathbf{x})=0 \\
-&h_{k}(\mathbf{x})\leq0\\
+\nabla L(\theta)
+&=2X^TX\theta-2X^Ty\\
+&=0
 \end{split}
 \end{equation}
 $$
 
-Define Lagrange multiplier:
 $$
-\mathcal{L}(\mathbf{x},\lambda,\mu)=f(x)+\sum_{j=1}^{m}\lambda_{j}g_{j}(\mathbf{x})+\sum_{k=1}^{p}\mu_{k}h_{k}(\mathbf{x})
-$$
-KKT conditions:
-$$
-\begin{equation}
-\left\{
-             \begin{array}{lr}
-            \nabla_{\mathbf{x}}\mathcal{L}=0 \\
-            g_{j}(\mathbf{x})=0 \\
-            h_{k}(\mathbf{x})\leq 0\\
-            \mu_{k}\geq 0\\
-            \mu_{k}h_{k}(\mathbf{x})=0
-             \end{array}
-\right.
-\end{equation}
+\theta^{*}=(X^TX)^{-1}X^Ty
 $$
 
-### Hard-Margin Support Vector Machines
+## 6 Gradient Descent
 
-Equivalent optimization problem rephrased by dual optimization problem:
+### 6.1
+
 $$
-\max_{\lambda_{i}\geq 0}\min_{w,\alpha}\|w\|^2-\sum_{i=1}^n\lambda_{i}[y_{i}(X_{i}\cdot w+\alpha)-1]
-$$
-To solve the inner optimization problem, define Lagrange multiplier:
-$$
-\mathcal{L}(w,\alpha,\lambda)=w^Tw-\sum_{i=1}^n\lambda_{i}[y_{i}(w^TX_{i}+\alpha)-1]
+L(x)=\frac{1}{2}x^TAx-b^Tx
 $$
 
 $$
-\frac{\partial\mathcal{L}}{\partial w}=2w-\sum_{i=1}^n\lambda_{i}y_{i}X_{i}=0
+\nabla L(x)=\frac{1}{2}(A+A^T)x-b=0
 $$
 
 $$
-\frac{\partial\mathcal{L}}{\partial \alpha}=-\sum_{i=1}^n\lambda_{i}y_{i}=0
+x^{*}=2(A+A^T)^{-1}b
 $$
 
-Finally, we get:
-$$
-\max_{\lambda_{i}\geq 0}\sum_{i=1}^n\lambda_{i}-\frac{1}{4}\sum_{i=1}^n\sum_{=1}^n\lambda_{i}\lambda_{j}y_{i}y_{j}X_{i}X_{j},\quad s.t.\sum_{i=1}^n\lambda_{i}y_{i}=0
-$$
+### 6.2
+
+let $i=0$, $x^{(0)}$<=some arbitrary vector
+
+`while True`:
+
+​	$x^{(i+1)}=x^{(i)}-\nabla f(x^{(i)})$.
+
+​	`if`$||x^{(i+1)}-x^{(i)}||<\epsilon$:
+
+​		`break`.
+
+​	$i=i+1$
+
+$x^{*}=x^{(i+1)}$
+
+### 6.3
+
