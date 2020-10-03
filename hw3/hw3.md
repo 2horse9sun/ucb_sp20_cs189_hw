@@ -114,3 +114,61 @@ $$
 $$
 x=S^{-1}U^Tt=\Lambda^{-1/2}U^Tt
 $$
+
+
+
+
+
+
+
+
+$$
+f(X_i)=\frac{1}{(\sqrt{2\pi})^d\sqrt{|\Sigma|}}\exp\{-\frac{1}{2}(X_i-\mu)^T\Sigma^{-1}(X_i-\mu)\}
+$$
+Likelihood:
+$$
+\mathcal{L}(\mu,\sigma;X_1,\cdots,X_n)=\prod_{i=1}^nf(X_i)
+$$
+Log likelihood:
+$$
+\mathcal{l}(\mu,\sigma;X_1,\cdots,X_n)=\sum_{i=1}^n\ln f(X_i)=\sum_{i=1}^n[-\frac{1}{2}(X_i-\mu)^T\Sigma^{-1}(X_i-\mu)-d\ln\sqrt{2\pi}-\ln\sqrt{|\Sigma|}]
+$$
+Take the derivative with respect to $\mu$ and set it to zero:
+$$
+\nabla_{\mu}\mathcal{l}=\sum_{i=1}^n\Sigma^{-1}(X_i-\mu)=0
+$$
+
+$$
+\hat{\mu}=\frac{1}{n}\sum_{i=1}^nX_i
+$$
+
+To find $\hat{\sigma}_i$:
+$$
+f(X_i)=\frac{1}{(\sqrt{2\pi})^d\prod_{j=1}^d\sigma_j}\exp\{-\frac{1}{2}(X_i-\mu)^T\Sigma^{-1}(X_i-\mu)\}
+$$
+
+$$
+\mathcal{l}(\mu,\sigma;X_1,\cdots,X_n)=\sum_{i=1}^n[-\frac{1}{2}\sum_{j=1}^d\frac{1}{\sigma_j^2}||X_i-\mu||^2-d\ln\sqrt{2\pi}-\ln\prod_{j=1}^d\sigma_j]
+$$
+
+$$
+\frac{\partial\mathcal{l}}{\partial \sigma_i}=\sum_{i=1}^n\frac{||X_i-\mu||^2-\sigma_i^2}{\sigma_i^3}=0
+$$
+
+$$
+\sigma_i^2=\frac{1}{n}\sum_{i=1}^n||X_i-\mu||^2=\frac{1}{n}\sum_{i=1}^n||X_i-\hat{\mu}||^2
+$$
+
+
+
+
+
+
+$$
+\nabla_{\mu}\mathcal{l}=\sum_{i=1}^nA^T\Sigma^{-1}(X_i-A\mu)=0
+$$
+
+$$
+\hat{\mu}=\frac{1}{n}\sum_{i=1}^nA^{-1}X_i
+$$
+
